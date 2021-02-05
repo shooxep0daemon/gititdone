@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 RUN apt-get update && apt-get upgrade -y
 RUN apt install maven -y && apt install tomcat9 -y && apt install git -y
-RUN git init && git clone https://github.com/jenkinsci/jenkins.git
+RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
 RUN cd jenkins && mvn build
 RUN cd war && cp jenkins.war /var/lib/tomcat9/webapps
 EXPOSE 80
