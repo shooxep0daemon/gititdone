@@ -5,4 +5,4 @@ RUN apt install maven -y
 RUN cd boxfuse-sample-java-war-hello && mvn package
 RUN cp /usr/local/tomcat/boxfuse-sample-java-war-hello/target/hello-1.0.war $CATALINA_HOME/webapps/
 EXPOSE 8080
-CMD ["/bin/catalina.sh" "run"]
+CMD ["./bin/catalina.sh" "run"]
