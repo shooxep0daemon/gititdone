@@ -50,5 +50,5 @@ services:
             WORDPRESS_DB_PASSWORD: mysecret
             WORDPRESS_DB_NAME: wp_db
 volumes:
-    - wordpress:/var/www/html
-    - pma:/var/www/html/pma
+    wordpress:/var/www/html
+    pma:/var/www/html/pma
