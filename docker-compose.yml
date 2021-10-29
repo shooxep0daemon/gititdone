@@ -3,48 +3,30 @@ services:
     nginx:
         image: nginx:latest
         ports:
-            - "8000:80"
+            - "80:80"
         volumes:
             - ./hosts:/etc/nginx/conf.d
             - ./www:/var/www
             - ./logs:/var/log/nginx
-        # nginx > php 
         links:
-            - php
             - wordpress
-            - pma
-    php:
-        image: php:7.4-fpm
-        # php > mysql
-        links:
-            - mysql
-        # add from target
-        volumes:
-            - ./www:/var/www
+        restart: always
+
     mysql:
         image: mysql:latest
         volumes: 
             - ./mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: mysecret
-    pma:
-        image: phpmyadmin/phpmyadmin
-        volumes:
-            - ./phpmyadmin:/var/www/html/pma
         restart: always
-        ports:
-            - 8183:80
-        environment:
-            PMA_HOST: mysql
-            MYSQL_USERNAME: root
-            MYSQL_ROOT_PASSWORD: mysecret
+
     wordpress:
         image: wordpress:latest
         restart: always
         links:
              - mysql
         ports:
-             - 8081:80
+             - 8081:8081
         volumes:
              - ./wordpress:/var/www/html
         environment:
@@ -53,3 +35,16 @@ services:
             WORDPRESS_DB_PASSWORD: mysecret
             WORDPRESS_DB_PREFIX: wp_
             WORDPRESS_DB_NAME: wp_db
+   
+    pma:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        links:
+            - mysql:mysl
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: mysql
+            MYSQL_USERNAME: root
+            MYSQL_ROOT_PASSWORD: mysecret
+    
