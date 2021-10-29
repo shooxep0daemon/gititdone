@@ -5,9 +5,9 @@ services:
         ports:
             - "80:80"
         volumes:
-            - ./hosts:/etc/nginx/conf.d
-            - ./www:/var/www
-            - ./logs:/var/log/nginx
+            - ./data/hosts:/etc/nginx/conf.d
+            - ./data/www:/var/www
+            - ./data/logs:/var/log/nginx
         links:
             - wordpress
         restart: always
@@ -15,7 +15,7 @@ services:
     mysql:
         image: mysql:latest
         volumes: 
-            - ./mysql:/var/lib/mysql
+            - ./data/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: mysecret
         restart: always
@@ -28,7 +28,7 @@ services:
         ports:
              - 8081:8081
         volumes:
-             - ./wordpress:/var/www/html
+             - ./data/wordpress:/var/www/html
         environment:
             WORDPRESS_DB_HOST: mysql
             WORDPRESS_DB_USER: root
@@ -40,9 +40,9 @@ services:
         image: phpmyadmin/phpmyadmin
         restart: always
         links:
-            - mysql:mysl
+            - mysql:mysql
         ports:
-            - 8080:80
+            - 8081:80
         environment:
             PMA_HOST: mysql
             MYSQL_USERNAME: root
