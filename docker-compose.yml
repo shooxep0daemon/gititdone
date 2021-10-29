@@ -41,9 +41,9 @@ services:
         image: wordpress:latest
         restart: always
         links:
-             - mysql:mysql
+             - mysql
         ports:
-             - 8080:81
+             - 8081:80
         environment:
             WORDPRESS_DB_HOST: mysql
             WORDPRESS_DB_USER: root
