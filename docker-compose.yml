@@ -17,32 +17,38 @@ services:
         volumes: 
             - ./data/mysql:/var/lib/mysql
         environment:
+            MYSQL_DATABASE: wp_db
+            MYSQL_USER: wp_usr
+            MYSQL_PASSWORD: wp_pwd
             MYSQL_ROOT_PASSWORD: mysecret
         restart: always
 
     wordpress:
+        depends_on:
+            - mysql
         image: wordpress:latest
         restart: always
         links:
              - mysql
         ports:
-             - 8081:8081
+             - 8081:80
         volumes:
              - ./data/wordpress:/var/www/html
         environment:
             WORDPRESS_DB_HOST: mysql
-            WORDPRESS_DB_USER: root
-            WORDPRESS_DB_PASSWORD: mysecret
-            WORDPRESS_DB_PREFIX: wp_
+            WORDPRESS_DB_USER: wp_usr
+            WORDPRESS_DB_PASSWORD: wp_pwd
             WORDPRESS_DB_NAME: wp_db
    
     pma:
+        depends_on:
+            - mysql
         image: phpmyadmin/phpmyadmin
         restart: always
         links:
             - mysql:mysql
         ports:
-            - 8081:80
+            - 8082:80
         environment:
             PMA_HOST: mysql
             MYSQL_USERNAME: root
