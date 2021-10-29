@@ -41,7 +41,7 @@ services:
   
     pma:
         depends_on:
-            - mysql
+            - db
         image: phpmyadmin/phpmyadmin
         restart: always
         links:
