@@ -27,7 +27,9 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: mysecret
     pma:
-        image: phpmyadmin/phpmyadmin
+        build: ./images/phpmyadmin
+        volumes:
+            -./www:/var/www
         restart: always
         links:
             - mysql
