@@ -32,7 +32,8 @@ services:
             - ./www/pma:/pma
         restart: always
         links:
-            - mysql     
+            - mysql  
+            - nginx   
         #ports:
         #    - 8183:80
         #environment:
