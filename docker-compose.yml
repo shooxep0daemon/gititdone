@@ -32,13 +32,13 @@ services:
             -./www:/var/www
         restart: always
         links:
-            - mysql
-        ports:
-            - 8183:80
-        environment:
-            PMA_HOST: mysql
-            MYSQL_USERNAME: root
-            MYSQL_ROOT_PASSWORD: mysecret
+            - mysql     
+        #ports:
+        #    - 8183:80
+        #environment:
+        #    PMA_HOST: mysql
+        #    MYSQL_USERNAME: root
+        #    MYSQL_ROOT_PASSWORD: mysecret
     wordpress:
         image: wordpress:latest
         restart: always
