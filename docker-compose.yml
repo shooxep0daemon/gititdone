@@ -1,5 +1,32 @@
-version: '3'
+version: "3.9"
+    
 services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+
     nginx:
         image: nginx:latest
         ports:
@@ -11,46 +38,23 @@ services:
         links:
             - wordpress
         restart: always
-
-    mysql:
-        image: mysql:latest
-        volumes: 
-            - ./data/mysql:/var/lib/mysql
-        environment:
-            MYSQL_DATABASE: wp_db
-            MYSQL_USER: wpuser
-            MYSQL_PASSWORD: wp_pwd
-            MYSQL_ROOT_PASSWORD: mysecret
-        restart: always
-
-    wordpress:
-        depends_on:
-            - mysql
-        image: wordpress:latest
-        restart: always
-        links:
-             - mysql
-        ports:
-             - 8081:80
-        volumes:
-             - ./data/wordpress:/var/www/html
-        environment:
-            WORDPRESS_DB_HOST: mysql:3306
-            WORDPRESS_DB_USER: wpuser
-            WORDPRESS_DB_PASSWORD: wp_pwd
-            WORDPRESS_DB_NAME: wp_db
-   
+  
     pma:
         depends_on:
             - mysql
         image: phpmyadmin/phpmyadmin
         restart: always
         links:
-            - mysql:mysql
+            - db
         ports:
             - 8082:80
         environment:
-            PMA_HOST: mysql
-            MYSQL_USERNAME: root
-            MYSQL_ROOT_PASSWORD: mysecret
+            PMA_HOST: db
+            MYSQL_USERNAME: wordpress
+            MYSQL_ROOT_PASSWORD: wordpress
+
+
+  volumes:
+      db_data: {}
+      wordpress_data: {}
     
