@@ -11,6 +11,8 @@ services:
         # nginx > php 
         links:
             - php
+            - wordpress
+            - pma
     php:
         image: php:7.4-fpm
         # php > mysql
