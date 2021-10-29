@@ -29,7 +29,7 @@ services:
     pma:
         build: ./images/phpmyadmin
         volumes:
-            - ./www:/pma
+            - ./www/pma:/pma
         restart: always
         links:
             - mysql     
