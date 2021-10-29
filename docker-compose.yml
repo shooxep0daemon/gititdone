@@ -18,7 +18,7 @@ services:
             - ./data/mysql:/var/lib/mysql
         environment:
             MYSQL_DATABASE: wp_db
-            MYSQL_USER: wp_usr
+            MYSQL_USER: wpuser
             MYSQL_PASSWORD: wp_pwd
             MYSQL_ROOT_PASSWORD: mysecret
         restart: always
@@ -36,7 +36,7 @@ services:
              - ./data/wordpress:/var/www/html
         environment:
             WORDPRESS_DB_HOST: mysql:3306
-            WORDPRESS_DB_USER: wp_usr
+            WORDPRESS_DB_USER: wpuser
             WORDPRESS_DB_PASSWORD: wp_pwd
             WORDPRESS_DB_NAME: wp_db
    
