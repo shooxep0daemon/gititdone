@@ -6,5 +6,5 @@ There are 3 instances DB, NGINX(proxy), PHPFPM
   define( 'DB_USER', 'mysqluser' ); 
   define( 'DB_PASSWORD', 'mysqlpwd' );
 4. run with docker-compose up -d
-all logs will be in /logs/nginx
-mysql database will be in /dbdata
+
+all logs will be in /logs/nginx and mysql database will be in /dbdata
