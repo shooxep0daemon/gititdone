@@ -14,52 +14,30 @@ services:
     networks:
       - testnw
 
-  nginx:
+  nginx-wp:
     image: nginx:1.20
     ports:
       - 80:80
     volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - wordpress:/var/www/html
-      - ./data/logs:/var/log/nginx
-    links:
-      - wordpress
+      - ./wordpress:/code
     restart: always
     networks:
       - testnw
 
-  wordpress:
-    depends_on:
-      - db
-    image: wordpress:php7.4-fpm
+  nginx-myphp:
+    image: nginx:1.20
     volumes:
-      - wordpress:/var/www/html
-    ports:
-      - "8083:80"
-    restart: always
-    env_file: .env
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: $MYSQL_USER
-      WORDPRESS_DB_PASSWORD: $MYSQL_PASSWORD
-      WORDPRESS_DB_NAME: wordpress
-    networks:
-      - testnw
+      - ./phpmyadmin:/code
+  networks:
+      - testnw 
   
-  pma:
-        depends_on:
-            - db
-        image: phpmyadmin/phpmyadmin
-        restart: always
-        links:
-            - db
-        ports:
-            - 8082:80
-        env_file: .env
-        environment:
-            PMA_HOST: db
-            MYSQL_USERNAME: $MYSQL_USER
-            MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
+  nginx-fpm:
+    image: php:7.5-fpm
+    volumes:
+      -./fpm:./code
+  networks:
+      - testnw
+
 volumes:
   wordpress:
   dbdata:
