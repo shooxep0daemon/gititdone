@@ -14,21 +14,21 @@ services:
       MYSQL_DATABASE: wordpress
 
   #nginx1.20
-  nginx_wp:
+  nginx:
     image: ./config/nginx
     ports:
       - 80:80
     volumes:
-      - ./wordpress:/code
-      - ./nginx/wp.conf:/etc/nginx/conf.d/nginx-wp.conf
+      - ./nginx/front.conf:/etc/nginx/conf.d/nginx-front.conf
+      - ./phpmyadmin:/pcode
+      - ./wordpress:/wcode
     restart: always
 
   #php-fpm7.4
-  nginx_phpmy:
+  phpfpm:
     build: ./config/phpfpm
-    volumes:
-      - ./phpmyadmin:/code
-      - ./nginx/phpmy.conf:/etc/nginx/conf.d/nginx-phpmy.conf
+    ports:
+      - 9000:9000
 
 volumes:
   wordpress:
