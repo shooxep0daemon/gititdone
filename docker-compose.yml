@@ -20,7 +20,7 @@ services:
       - 80:80
     volumes:
       - ./nginx/front.conf:/etc/nginx/conf.d/nginx-front.conf
-      #- ./www:/var/www
+      - ./www:/var/www
       - ./logs/nginx:/var/log/nginx
     restart: always
 
