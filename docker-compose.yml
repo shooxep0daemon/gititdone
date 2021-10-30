@@ -6,7 +6,6 @@ services:
     build: ./config/mysql8
     volumes:
       - dbdata:/var/lib/mysql
-      - ./sock/mysql.sock:/var/run/mysqld/mysqld.sock
     ports:
       - 3306:3306
     restart: always
@@ -23,7 +22,6 @@ services:
       - ./nginx/front.conf:/etc/nginx/conf.d/nginx-front.conf
       - ./www:/var/www
       - ./logs/nginx:/var/log/nginx
-      - ./sock:/sock
     restart: always
 
   #php-fpm7.4
@@ -31,11 +29,8 @@ services:
     build: ./config/phpfpm
     volumes:
       - ./www:/var/www
-      - ./sock:/sock
     ports:
       - 9000:9000
 
 volumes:
-  wordpress:
   dbdata:
-  sock:
