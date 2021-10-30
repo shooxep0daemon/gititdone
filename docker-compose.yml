@@ -10,7 +10,7 @@ services:
     restart: always
     env_file: .env
     environment:
-      - MYSQL_DATABASE: wordpress
+      MYSQL_DATABASE: wordpress
     networks:
       - testnw
 
