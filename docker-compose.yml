@@ -6,6 +6,7 @@ services:
     build: ./config/mysql8
     volumes:
       - dbdata:/var/lib/mysql
+      - ./mysqld.sock:/var/run/mysqld/mysqld.sock
     ports:
       - 3306:3306
     restart: always
