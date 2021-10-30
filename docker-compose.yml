@@ -12,7 +12,7 @@ services:
     environment:
       MYSQL_DATABASE: wordpress
     networks:
-      - testnw
+       testnw
 
   nginx-wp:
     image: nginx:1.20
@@ -22,21 +22,21 @@ services:
       - ./wordpress:/code
     restart: always
     networks:
-      - testnw
+       testnw
 
   nginx-myphp:
     image: nginx:1.20
     volumes:
       - ./phpmyadmin:/code
   networks:
-      - testnw 
+       testnw 
   
   nginx-fpm:
     image: php:7.5-fpm
     volumes:
       -./fpm:./code
   networks:
-      - testnw
+       testnw
 
 volumes:
   wordpress:
