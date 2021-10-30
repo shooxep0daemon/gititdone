@@ -48,7 +48,8 @@ services:
     networks:
       testnw:
           ipv4_address: 192.168.222.4
-      volumes:
+
+volumes:
   wordpress:
   dbdata:
 
