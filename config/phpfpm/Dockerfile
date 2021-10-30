@@ -4,7 +4,7 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM debian:buster
+FROM debian:buster-slim
 
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542
@@ -58,11 +58,11 @@ ENV PHP_CFLAGS="-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_
 ENV PHP_CPPFLAGS="$PHP_CFLAGS"
 ENV PHP_LDFLAGS="-Wl,-O1 -pie"
 
-ENV GPG_KEYS 1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F
+ENV GPG_KEYS 42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312
 
-ENV PHP_VERSION 8.0.12
-ENV PHP_URL="https://www.php.net/distributions/php-8.0.12.tar.xz" PHP_ASC_URL="https://www.php.net/distributions/php-8.0.12.tar.xz.asc"
-ENV PHP_SHA256="a501017b3b0fd3023223ea25d98e87369b782f8a82310c4033d7ea6a989fea0a"
+ENV PHP_VERSION 7.4.25
+ENV PHP_URL="https://www.php.net/distributions/php-7.4.25.tar.xz" PHP_ASC_URL="https://www.php.net/distributions/php-7.4.25.tar.xz.asc"
+ENV PHP_SHA256="12a758f1d7fee544387a28d3cf73226f47e3a52fb3049f07fcc37d156d393c0a"
 
 RUN set -eux; \
 	\
@@ -97,6 +97,7 @@ RUN set -eux; \
 
 COPY docker-php-source /usr/local/bin/
 RUN chmod +777 /usr/local/bin/docker-php-source
+
 RUN set -eux; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
