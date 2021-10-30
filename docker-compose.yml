@@ -4,9 +4,10 @@ services:
   #mysql8
   db:
     build: ./config/mysql8
+    command: chmod -R 777 sock
     volumes:
       - dbdata:/var/lib/mysql
-      - sock:/sock
+      - sock/mysql.sock:/var/run/mysqld/mysqld.sock
     ports:
       - 3306:3306
     restart: always
