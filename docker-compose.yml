@@ -17,7 +17,7 @@ services:
           ipv4_address: 192.168.222.10
 
   #front 80 wp
-  nginx-wp:
+  nginx_wp:
     image: nginx:1.20
     ports:
       - 80:80
@@ -30,7 +30,7 @@ services:
           ipv4_address: 192.168.222.2
 
   #nginx phpmyadmin 
-  nginx-phpmy:
+  nginx_phpmy:
     image: nginx:1.20
     volumes:
       - ./phpmyadmin:/code
@@ -40,7 +40,7 @@ services:
           ipv4_address: 192.168.222.3
   
   #nginx fpm 
-  nginx-fpm:
+  nginx_fpm:
     image: php:7.4-fpm
     networks:
       testnw:
