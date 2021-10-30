@@ -17,16 +17,16 @@ services:
   nginx:
     image: nginx:1.20
     ports:
-        - 80:80
+      - 80:80
     volumes:
-        - ./nginx:/etc/nginx/conf.d
-        - wordpress:/var/www/html
-        - ./data/logs:/var/log/nginx
+      - ./nginx:/etc/nginx/conf.d
+      - wordpress:/var/www/html
+      - ./data/logs:/var/log/nginx
      links:
-        - wordpress
+      - wordpress
      restart: always
      networks:
-        - testnw
+      - testnw
 
   wordpress:
     depends_on:
