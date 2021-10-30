@@ -4,7 +4,6 @@ services:
   #mysql8
   db:
     build: ./config/mysql8
-    command: chmod -R 777 ./sock
     volumes:
       - dbdata:/var/lib/mysql
       - ./sock/mysql.sock:/var/run/mysqld/mysqld.sock
