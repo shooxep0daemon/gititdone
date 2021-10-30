@@ -23,7 +23,7 @@ services:
       - 80:80
     volumes:
       - ./wordpress:/code
-      - ./nginx/front.conf:/etc/nginx/conf.d/nginx-front.conf
+      - ./nginx/wp.conf:/etc/nginx/conf.d/nginx-wp.conf
     restart: always
     networks:
         testnw:
@@ -34,7 +34,7 @@ services:
     image: nginx:1.20
     volumes:
       - ./phpmyadmin:/code
-      - ./nginx/back.conf:/etc/nginx/conf.d/nginx-back.conf
+      - ./nginx/phpmy.conf:/etc/nginx/conf.d/nginx-phpmy.conf
     networks:
       testnw:
           ipv4_address: 192.168.222.3
@@ -42,9 +42,6 @@ services:
   #nginx fpm 
   nginx-fpm:
     image: php:7.4-fpm
-    volumes:
-      - ./phpmyadmin:/code
-      - ./nginx/back.conf:/etc/nginx/conf.d/nginx-back.conf
     networks:
       testnw:
           ipv4_address: 192.168.222.4
