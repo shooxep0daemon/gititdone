@@ -5,4 +5,4 @@ There are 3 instances DB, NGINX(proxy), PHPFPM
 3. edit wp-config.php in www/ 
   define( 'DB_USER', 'mysqluser' ); 
   define( 'DB_PASSWORD', 'mysqlpwd' );
-run with docker-compose up -d
+4. run with docker-compose up -d
