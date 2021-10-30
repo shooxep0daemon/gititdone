@@ -15,7 +15,7 @@ services:
 
   #nginx1.20
   nginx:
-    image: ./config/nginx
+    build: ./config/nginx
     ports:
       - 80:80
     volumes:
