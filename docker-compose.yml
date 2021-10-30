@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  #database
+  #mysql8
   db:
-    image: mysql:8.0
+    build: ./config/mysql8
     volumes:
       - dbdata:/var/lib/mysql
     ports:
@@ -12,48 +12,24 @@ services:
     env_file: .env
     environment:
       MYSQL_DATABASE: wordpress
-    networks:
-        testnw:
-          ipv4_address: 192.168.222.10
 
-  #front 80 wp
+  #nginx1.20
   nginx_wp:
-    image: nginx:1.20
+    image: ./config/nginx
     ports:
       - 80:80
     volumes:
       - ./wordpress:/code
       - ./nginx/wp.conf:/etc/nginx/conf.d/nginx-wp.conf
     restart: always
-    networks:
-        testnw:
-          ipv4_address: 192.168.222.2
 
-  #nginx phpmyadmin 
+  #php-fpm7.4
   nginx_phpmy:
-    image: nginx:1.20
+    build: ./config/phpfpm
     volumes:
       - ./phpmyadmin:/code
       - ./nginx/phpmy.conf:/etc/nginx/conf.d/nginx-phpmy.conf
-    networks:
-      testnw:
-          ipv4_address: 192.168.222.3
-  
-  #nginx fpm 
-  nginx_fpm:
-    image: php:7.4-fpm
-    networks:
-      testnw:
-          ipv4_address: 192.168.222.4
 
 volumes:
   wordpress:
   dbdata:
-
-networks:
-  testnw:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.222.0/24
-    
