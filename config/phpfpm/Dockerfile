@@ -222,7 +222,7 @@ RUN docker-php-ext-enable sodium
 
 ENTRYPOINT ["docker-php-entrypoint"]
 WORKDIR /var/www/html
-RUN apt install php-mysqli -y
+RUN apt update && apt install php-mysqli -y
 RUN set -eux; \
 	cd /usr/local/etc; \
 	if [ -d php-fpm.d ]; then \
