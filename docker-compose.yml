@@ -28,14 +28,14 @@ services:
     image: nginx:1.20
     volumes:
       - ./phpmyadmin:/code
-  networks:
+    networks:
       - testnw 
   
   nginx-fpm:
     image: php:7.5-fpm
     volumes:
       -./fpm:./code
-  networks:
+    networks:
       - testnw
 
 volumes:
