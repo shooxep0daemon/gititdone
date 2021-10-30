@@ -34,7 +34,7 @@ services:
   nginx-fpm:
     image: php:7.4-fpm
     volumes:
-      - ./fpm:./code
+      - ./fpm:/code
     networks:
       - testnw
 
