@@ -217,6 +217,7 @@ RUN set -eux; \
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-php-ext-enable
 RUN chmod +x /usr/local/bin/docker-php-entrypoint
+RUN docker-php-ext-install mysqli
 # sodium was built as a shared module (so that it can be replaced later if so desired), so let's enable it too (https://github.com/docker-library/php/issues/598)
 RUN docker-php-ext-enable sodium
 
