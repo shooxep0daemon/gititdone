@@ -27,8 +27,8 @@ services:
   #php-fpm7.4
   phpfpm:
     build: ./config/phpfpm
-    volumes:
-      - ./www:/var/www
+    #volumes:
+    #  - ./www:/var/www
     ports:
       - 9000:9000
 
